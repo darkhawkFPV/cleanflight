@@ -691,10 +691,10 @@ void applyLedWarningLayer(uint8_t updateNow)
 
     if (updateNow && warningFlashCounter == 0) {
         warningFlags = WARNING_FLAG_NONE;
-        if (feature(FEATURE_VBAT) && getBatteryState() != BATTERY_OK) {
+        if (feature(FEATURE_VBAT) && calculateBatteryState() != BATTERY_OK) {
             warningFlags |= WARNING_FLAG_LOW_BATTERY;
         }
-        if (feature(FEATURE_FAILSAFE) && failsafeIsActive()) {
+        if (feature(FEATURE_FAILSAFE) && failsafeHasTimerElapsed()) {
             warningFlags |= WARNING_FLAG_FAILSAFE;
         }
         if (!ARMING_FLAG(ARMED) && !ARMING_FLAG(OK_TO_ARM)) {
